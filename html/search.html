@@ -1,0 +1,134 @@
+<div class="search-results-container">
+    <!-- No Results Found -->
+    <div ng-if="data.searchResults.length == 0" class="no-results">
+        <p>Sorry, nothing matches your search.</p>
+    </div>
+
+    <!-- Results Found -->
+    <div ng-if="data.searchResults.length != 0" class="search-results">
+        <h3 class="search-results-title">These excellent candidates match your search:</h3>
+        
+        <!-- Results Table -->
+        <div class="results-table">
+            <div class="table-header">
+                <div class="table-cell">Product Name</div>
+                <div class="table-cell">Description</div>
+                <div class="table-cell">Price</div>
+            </div>
+            <div class="table-body">
+                <div class="table-row" ng-repeat="item in data.searchResults">
+                    <div class="table-cell">
+                        <a class="product" href="/product/{{ item.sku }}">{{ item.name }}</a>
+                    </div>
+                    <div class="table-cell">{{ item.description }}</div>
+                    <div class="table-cell currency">€{{ item.price.toFixed(2) }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Styling -->
+<style type="text/css">
+    /* Global Styles */
+    .search-results-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* No Results Styling */
+    .no-results {
+        text-align: center;
+        font-size: 1.2em;
+        color: #e74c3c;
+        padding: 40px;
+    }
+
+    /* Search Results Title */
+    .search-results-title {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #007bff;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Table Styling */
+    .results-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .table-header {
+        background-color: #f1f1f1;
+        font-weight: bold;
+    }
+
+    .table-cell {
+        padding: 12px;
+        text-align: left;
+        font-size: 1.1em;
+        color: #333;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .table-cell a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .table-cell a:hover {
+        text-decoration: underline;
+    }
+
+    .currency {
+        color: #28a745;
+    }
+
+    .table-row:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+        .search-results-container {
+            padding: 15px;
+        }
+
+        .search-results-title {
+            font-size: 1.4em;
+        }
+
+        .table-cell {
+            font-size: 1em;
+            padding: 10px;
+        }
+
+        .results-table {
+            display: block;
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+
+        .table-header,
+        .table-row {
+            display: block;
+        }
+
+        .table-cell {
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .table-header .table-cell {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    }
+</style>

@@ -1,0 +1,158 @@
+<div>
+    <h3>Review Your Order</h3>
+
+    <!-- Order Review Table -->
+    <div ng-if="data.cart.total != 0" class="order-review">
+        <table class="order-summary">
+            <thead>
+                <tr>
+                    <th>QTY</th>
+                    <th>Name</th>
+                    <th>Sub Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in data.cart.items">
+                    <td>{{ item.qty }}</td>
+                    <td>{{ item.name }}</td>
+                    <td class="currency">&euro;{{ item.subtotal.toFixed(2) }}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>Inc Tax</td>
+                    <td class="currency">&euro;{{ data.cart.tax.toFixed(2) }}</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>Total</td>
+                    <td class="currency total-price">&euro;{{ data.cart.total.toFixed(2) }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <button ng-disabled="data.buttonDisabled" ng-click="pay();" class="pay-button">Pay Now</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <!-- Message Section -->
+    <div class="message" ng-if="data.message">
+        <p>{{ data.message }}</p>
+    </div>
+
+    <!-- Thank You Message -->
+    <div ng-if="data.cont" class="thank-you">
+        <p>Thank you for your order!</p>
+        <a href="/" class="cont">Continue shopping</a>
+    </div>
+</div>
+
+<!-- Styling -->
+<style type="text/css">
+    /* Global Styles */
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        color: #333;
+    }
+
+    h3 {
+        font-size: 2em;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .order-review {
+        margin: 0 auto;
+        max-width: 800px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    .order-summary {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .order-summary th, .order-summary td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .order-summary th {
+        background-color: #f4f4f9;
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+
+    .order-summary td.currency {
+        text-align: right;
+        color: #007bff;
+        font-weight: bold;
+    }
+
+    .total-price {
+        font-size: 1.5em;
+        color: #d9534f;
+    }
+
+    /* Button Styles */
+    .pay-button {
+        padding: 12px 24px;
+        font-size: 18px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .pay-button:hover {
+        background-color: #0056b3;
+    }
+
+    .pay-button:disabled {
+        background-color: #b0c4de;
+        cursor: not-allowed;
+    }
+
+    /* Message and Thank You Section */
+    .message {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 1.2em;
+        color: #333;
+    }
+
+    .thank-you {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 1.5em;
+        color: #28a745;
+    }
+
+    .cont {
+        font-size: 1.2em;
+        color: #007bff;
+        text-decoration: underline;
+    }
+
+    .cont:hover {
+        color: #0056b3;
+    }
+</style>
